@@ -1,4 +1,4 @@
-import { CREATE_POST, EDIT_POST, DELETE_POST, VIEW_POST } from "./actionTypes";
+import { CREATE_POST, DELETE_POST } from "./actionTypes";
 
 const initialPosts = [
   {
@@ -14,7 +14,7 @@ const initialPosts = [
     content: "I am learning javascript and react"
   },
   {
-    id: 2,
+    id: 3,
     author: 1,
     title: "What is programming?",
     content: "Programming is fun and challenging"

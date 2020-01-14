@@ -19,6 +19,6 @@ export const registerUser = (name, username, password) => (
 export const loginUser = (username, password) => (dispatch, getState) => {
   const loggedInUser = getState().users.users.filter(
     user => user.username === username && user.password === password
-  );
+  )[0];
   loggedInUser && dispatch({ type: LOGIN_USER, payload: loggedInUser });
 };

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux";
+import { Link, useHistory } from "react-router-dom";
 
 function Login({ users, loginUser }) {
   const initialState = { username: "", password: "" };
   const [form, setForm] = useState(initialState);
   const { username, password } = form;
+  const history = useHistory();
 
   const handleChange = e =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,11 +20,13 @@ function Login({ users, loginUser }) {
       // Authenticating user
       const authenticatedUser = users.filter(
         user => user.username === username && user.password === password
-      );
+      )[0];
+      console.log(authenticatedUser);
       if (!authenticatedUser) {
         alert(loginError);
       } else {
         loginUser(username, password);
+        history.replace("/register");
       }
     }
   };
@@ -47,7 +51,17 @@ function Login({ users, loginUser }) {
             onChange={handleChange}
           />
         </div>
-        <button onClick={handleClick}>Sign in</button>
+        <div>
+          <button onClick={handleClick}>Sign in</button>
+        </div>
+        <div>
+          <h6>
+            Need an account?{" "}
+            <small>
+              <Link to="/register">Register</Link>
+            </small>
+          </h6>
+        </div>
       </div>
     </>
   );
