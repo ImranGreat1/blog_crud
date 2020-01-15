@@ -1,4 +1,4 @@
-import { REGISTER_USER, LOGIN_USER } from "./actionTypes";
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from "./actionTypes";
 
 // const initialUsers
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
     { id: 2, name: "Zahradeen", username: "Zeeboy", password: "zeeboy10" },
     { id: 3, name: "Mujaheed", username: "Boss", password: "boss1" }
   ],
-  loggedInUser: null
+  authenticatedUser: null
 };
 
 export default function(state = initialState, action) {
@@ -20,7 +20,12 @@ export default function(state = initialState, action) {
     case LOGIN_USER:
       return {
         ...state,
-        loggedInUser: action.payload
+        authenticatedUser: action.payload
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        authenticatedUser: null
       };
     default:
       return state;

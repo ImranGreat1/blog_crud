@@ -1,2 +1,2 @@
-export { registerUser } from "./users/actions";
-export { loginUser } from "./users/actions";
+export { registerUser, loginUser, logoutUser } from "./users/actions";
+export { createPost } from "./posts/actions";

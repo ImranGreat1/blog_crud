@@ -1,4 +1,4 @@
-import { REGISTER_USER, LOGIN_USER } from "./actionTypes";
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from "./actionTypes";
 
 export const registerUser = (name, username, password) => (
   dispatch,
@@ -17,8 +17,14 @@ export const registerUser = (name, username, password) => (
 };
 
 export const loginUser = (username, password) => (dispatch, getState) => {
-  const loggedInUser = getState().users.users.filter(
+  const authenticatedUser = getState().users.users.filter(
     user => user.username === username && user.password === password
   )[0];
-  loggedInUser && dispatch({ type: LOGIN_USER, payload: loggedInUser });
+  authenticatedUser &&
+    dispatch({ type: LOGIN_USER, payload: authenticatedUser });
 };
+
+export const logoutUser = () => dispatch =>
+  dispatch({
+    type: LOGOUT_USER
+  });

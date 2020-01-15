@@ -80,7 +80,7 @@ function UserRegister(props) {
             <h6>
               Have an account?{" "}
               <small>
-                <Link to="/">login</Link>
+                <Link to="/login">login</Link>
               </small>
             </h6>
           </div>

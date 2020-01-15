@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
-function Login({ users, loginUser }) {
+function Login({ users, loginUser, authenticatedUser }) {
   const initialState = { username: "", password: "" };
   const [form, setForm] = useState(initialState);
   const { username, password } = form;
@@ -21,18 +21,21 @@ function Login({ users, loginUser }) {
       const authenticatedUser = users.filter(
         user => user.username === username && user.password === password
       )[0];
-      console.log(authenticatedUser);
       if (!authenticatedUser) {
         alert(loginError);
       } else {
         loginUser(username, password);
-        history.replace("/register");
+        history.replace("/");
       }
     }
   };
+
+  if (authenticatedUser) return <Redirect to="/" />;
+
   return (
     <>
       <div>
+        <Link to="/">Home</Link>
         <div>
           <label>Username</label>
           <input
@@ -68,7 +71,8 @@ function Login({ users, loginUser }) {
 }
 
 const mapStateToProps = state => ({
-  users: state.users.users
+  users: state.users.users,
+  authenticatedUser: state.users.authenticatedUser
 });
 
 const mapDispatchToProps = dispatch => ({
