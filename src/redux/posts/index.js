@@ -1,4 +1,4 @@
-import { CREATE_POST, DELETE_POST } from "./actionTypes";
+import { CREATE_POST, DELETE_POST, EDIT_POST } from "./actionTypes";
 
 const initialPosts = [
   {
@@ -38,6 +38,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: updatedPosts
+      };
+    case EDIT_POST:
+      const { editedPost, postId } = action.payload;
+      const prevPost = state.posts.filter(post => post.id === postId)[0];
+      const { posts } = state;
+      posts[posts.indexOf(prevPost)] = editedPost;
+      return {
+        ...state,
+        posts
       };
     default:
       return state;

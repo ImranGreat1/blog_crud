@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../redux";
 
-function PostList({ posts, authenticatedUser }) {
+function PostList({ posts, authenticatedUser, users }) {
   const dispatch = useDispatch();
   return (
     <div>
@@ -22,7 +22,16 @@ function PostList({ posts, authenticatedUser }) {
         <h3>{authenticatedUser.username}</h3>
       </nav>
       {posts.map(post => (
-        <div key={post.id}>{post.title}</div>
+        <div key={post.id}>
+          <h6>
+            Written by:{" "}
+            {users.filter(user => post.author === user.id)[0].username}
+          </h6>
+          <h3>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          </h3>
+          <hr />
+        </div>
       ))}
     </div>
   );
@@ -30,7 +39,8 @@ function PostList({ posts, authenticatedUser }) {
 
 const mapStateToProps = state => ({
   posts: state.posts.posts,
-  authenticatedUser: state.users.authenticatedUser
+  authenticatedUser: state.users.authenticatedUser,
+  users: state.users.users
 });
 
 export default connect(mapStateToProps)(PostList);
