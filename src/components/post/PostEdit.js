@@ -51,7 +51,7 @@ function PostEdit({ match, history }) {
           <textarea name="content" value={content} onChange={handleChange} />
         </div>
         <div>
-          <button onClick={handleClick}>Create post</button>
+          <button onClick={handleClick}>Update post</button>
         </div>
       </div>
     </>

@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { deletePost } from "../../redux";
 
-function Post({ match }) {
+function Post({ match, history }) {
   const postId = match.params.postId;
+  const dispatch = useDispatch();
   const post = useSelector(state => {
     const filteredPost = state.posts.posts.filter(
       post => post.id === Number(postId)
@@ -12,6 +14,11 @@ function Post({ match }) {
   });
 
   const users = useSelector(state => state.users.users);
+
+  const handleDelete = () => {
+    dispatch(deletePost(post.id));
+    history.push("/");
+  };
 
   return (
     <div>
@@ -24,6 +31,11 @@ function Post({ match }) {
       <hr />
       <div>
         <Link to={`${match.url}/edit`}>Edit</Link>
+      </div>
+      <div>
+        <button style={{ border: "none" }} onClick={handleDelete}>
+          delete
+        </button>
       </div>
     </div>
   );

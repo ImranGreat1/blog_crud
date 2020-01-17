@@ -1,4 +1,4 @@
-import { CREATE_POST, EDIT_POST } from "./actionTypes";
+import { CREATE_POST, EDIT_POST, DELETE_POST } from "./actionTypes";
 
 // Create post
 export const createPost = post => (dispatch, getState) => {
@@ -16,4 +16,12 @@ export const editPost = (editedPost, postId) => dispatch =>
   dispatch({
     type: EDIT_POST,
     payload: { editedPost, postId }
+  });
+
+// Delete post
+
+export const deletePost = id => dispatch =>
+  dispatch({
+    type: DELETE_POST,
+    payload: id
   });
